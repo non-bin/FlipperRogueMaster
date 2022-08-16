@@ -34,3 +34,6 @@
 [submodule "applications/tamagotchi_p1/tamalib"]
 	path = applications/tamagotchi_p1/tamalib
 	url = https://github.com/jcrona/tamalib.git
+[submodule "applications/doom"]
+	path = applications/doom
+	url = https://github.com/non-bin/flipperDoom
