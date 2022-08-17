@@ -125,5 +125,6 @@ App(
         "GAME_MandelbrotSet",
         "GAME_GameOfLife",
         "GAME_Tanks",
+        "GAME_Doom",
     ],
 )
