@@ -8,7 +8,7 @@ public:
     void on_exit(RfidDebugApp* app) final;
 
 private:
-    void draw_menu(RfidDebugApp* app);
+    void draw_menu(RfidDebugApp* app, int32_t selected);
     void submenu_callback(void* context, uint32_t index);
     uint32_t submenu_item_selected = 0;
 };

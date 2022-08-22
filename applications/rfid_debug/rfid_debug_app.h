@@ -9,6 +9,7 @@
 #include <view_modules/submenu_vm.h>
 #include "view_modules/rfid_view_lftune_vm.h"
 
+#include "../lfrfid/helpers/rfid_worker.h"
 class RfidDebugApp {
 public:
     enum class EventType : uint8_t {
@@ -32,6 +33,10 @@ public:
     };
 
     bool HF_field_enabled;
+    bool LF_field_enabled;
+
+    RfidWorker worker;
+    NotificationApp* notification;
 
     SceneController<GenericScene<RfidDebugApp>, RfidDebugApp> scene_controller;
     ViewController<RfidDebugApp, SubmenuVM, RfidViewLFTuneVM> view_controller;
