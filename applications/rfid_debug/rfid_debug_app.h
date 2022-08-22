@@ -10,6 +10,8 @@
 #include "view_modules/rfid_view_lftune_vm.h"
 
 #include "../lfrfid/helpers/rfid_worker.h"
+#include <notification/notification.h>
+
 class RfidDebugApp {
 public:
     enum class EventType : uint8_t {
