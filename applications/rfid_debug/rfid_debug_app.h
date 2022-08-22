@@ -7,9 +7,9 @@
 #include <view_controller.hpp>
 
 #include <view_modules/submenu_vm.h>
-#include "view_modules/lfrfid_view_tune_vm.h"
+#include "view_modules/rfid_view_lftune_vm.h"
 
-class LfRfidDebugApp {
+class RfidDebugApp {
 public:
     enum class EventType : uint8_t {
         GENERIC_EVENT_ENUM_VALUES,
@@ -18,7 +18,8 @@ public:
 
     enum class SceneType : uint8_t {
         GENERIC_SCENE_ENUM_VALUES,
-        TuneScene,
+        LFTuneScene,
+        HFFieldScene,
     };
 
     class Event {
@@ -30,11 +31,13 @@ public:
         EventType type;
     };
 
-    SceneController<GenericScene<LfRfidDebugApp>, LfRfidDebugApp> scene_controller;
-    ViewController<LfRfidDebugApp, SubmenuVM, LfRfidViewTuneVM> view_controller;
+    bool HF_field_enabled;
 
-    ~LfRfidDebugApp();
-    LfRfidDebugApp();
+    SceneController<GenericScene<RfidDebugApp>, RfidDebugApp> scene_controller;
+    ViewController<RfidDebugApp, SubmenuVM, RfidViewLFTuneVM> view_controller;
+
+    ~RfidDebugApp();
+    RfidDebugApp();
 
     void run();
 };
