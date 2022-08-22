@@ -5,10 +5,11 @@ typedef enum {
     SubmenuHFField,
 } SubmenuIndex;
 
-void RfidDebugAppSceneStart::on_enter(RfidDebugApp* app, bool need_restore) {
+void RfidDebugAppSceneStart::draw_menu(RfidDebugApp* app) {
     auto submenu = app->view_controller.get<SubmenuVM>();
     auto callback = cbc::obtain_connector(this, &RfidDebugAppSceneStart::submenu_callback);
-    app->HF_field_enabled = false;
+
+    submenu->clean();
 
     submenu->add_item("LF Tune", SubmenuLFTune, callback, app);
 
@@ -17,10 +18,17 @@ void RfidDebugAppSceneStart::on_enter(RfidDebugApp* app, bool need_restore) {
     } else {
         submenu->add_item("HF Field", SubmenuHFField, callback, app);
     }
+}
 
+void RfidDebugAppSceneStart::on_enter(RfidDebugApp* app, bool need_restore) {
+    auto submenu = app->view_controller.get<SubmenuVM>();
+    app->HF_field_enabled = false;
+
+    draw_menu(app);
     if(need_restore) {
         submenu->set_selected_item(submenu_item_selected);
     }
+
     app->view_controller.switch_to<SubmenuVM>();
 }
 
@@ -54,12 +62,13 @@ void RfidDebugAppSceneStart::submenu_callback(void* context, uint32_t index) {
         } else {
             furi_hal_nfc_field_off();
         }
+        draw_menu(app);
+    } else {
+        RfidDebugApp::Event event;
+
+        event.type = RfidDebugApp::EventType::MenuSelected;
+        event.payload.menu_index = index;
+
+        app->view_controller.send_event(&event);
     }
-
-    RfidDebugApp::Event event;
-
-    event.type = RfidDebugApp::EventType::MenuSelected;
-    event.payload.menu_index = index;
-
-    app->view_controller.send_event(&event);
 }
