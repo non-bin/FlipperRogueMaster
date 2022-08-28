@@ -27,10 +27,10 @@ static const Icon* const portrait_bad[MOODS_TOTAL] = {
 
 static const Icon* const* portraits[MOODS_TOTAL] = {portrait_happy, portrait_ok, portrait_bad};
 
-static const char* const moods[16] = {
-    "Stoned",
-    "Baked",
-    "Ripped",
+static const char* const moods[13] = {
+    // "Stoned",
+    // "Baked",
+    // "Ripped",
     "Joyful",
     "Happy",
     "Satisfied",
